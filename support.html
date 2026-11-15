@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>App Support · Tom Easterbrook</title>
+  <meta name="description" content="Help and contact for Tom Easterbrook's apps, including Solitaire: Classic Edition for iPhone, iPad and Mac.">
+  <link rel="icon" href="img/avatar.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="rough">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7"/>
+      <feDisplacementMap in="SourceGraphic" scale="14"/>
+    </filter>
+  </svg>
+
+  <div class="brush brush-a" aria-hidden="true"></div>
+  <div class="brush brush-b" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <a class="back" href="index.html">← Back to projects</a>
+
+    <article class="policy">
+      <p class="scribble">need a hand?</p>
+      <h1 class="policy-title">App Support</h1>
+
+      <p class="sent" id="sent" hidden>Thanks, your message is on its way. I'll reply to the email address you gave, usually within a couple of days.</p>
+
+      <h2>Solitaire: Classic Edition</h2>
+      <ul>
+        <li><strong>Remove Ads:</strong> on iPhone and iPad, open the pause menu (the Menu button, bottom right) and tap <strong>Remove ads</strong>. It's a one-off purchase. The Mac version has no adverts.</li>
+        <li><strong>Bought Remove Ads before, on a new device?</strong> Open the pause menu and tap <strong>Restore purchases</strong>, signed in with the same Apple Account.</li>
+        <li><strong>Undo:</strong> tap <strong>Undo</strong> (or press ⌘Z on the Mac) to take back moves one at a time, as many as you like.</li>
+        <li><strong>Hints:</strong> tap <strong>Hint</strong> (or press H on the Mac). The first hint points you along a way to win. Tap again to see other moves.</li>
+        <li><strong>Can every game be won?</strong> Yes. Every deal is checked before it's dealt, so there's always a way through.</li>
+        <li><strong>Advertising choices:</strong> in the UK and EU, open the pause menu and tap <strong>Privacy settings</strong> to change what you agreed to. See the <a href="privacy.html">privacy policy</a> for more.</li>
+      </ul>
+
+      <h2>Get in touch</h2>
+      <p>Found a bug, or have an idea? Send me a message and I'll reply by email.</p>
+
+      <form class="contact" action="https://formsubmit.co/tomeasterbrook98@gmail.com" method="POST">
+        <!-- FormSubmit forwards this form to my inbox: https://formsubmit.co -->
+        <input type="hidden" name="_subject" value="App support message">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://tomeasterbrook.co.uk/support.html?sent=1#sent">
+        <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <label for="name">Your name</label>
+        <input id="name" name="name" type="text" autocomplete="name" required>
+
+        <label for="email">Your email</label>
+        <input id="email" name="email" type="email" autocomplete="email" required>
+
+        <label for="app">Which app?</label>
+        <select id="app" name="app">
+          <option>Solitaire: Classic Edition (iPhone or iPad)</option>
+          <option>Solitaire: Classic Edition (Mac)</option>
+          <option>Something else</option>
+        </select>
+
+        <label for="message">Your message</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+
+        <button class="link" type="submit">Send message <span class="arrow" aria-hidden="true">→</span></button>
+        <p class="fine">Your message is sent through FormSubmit, which passes it on to me by email. See the <a href="privacy.html">privacy policy</a>.</p>
+      </form>
+    </article>
+
+    <footer class="foot">
+      <p>© 2026 Tom Easterbrook. All rights reserved.</p>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="support.html" aria-current="page">App Support</a>
+        <a href="privacy.html">App Privacy Policy</a>
+      </nav>
+    </footer>
+  </main>
+
+  <script>
+    // Back from FormSubmit after sending: say thanks.
+    if (new URLSearchParams(location.search).has('sent')) {
+      document.getElementById('sent').hidden = false
+    }
+  </script>
+</body>
+</html>
