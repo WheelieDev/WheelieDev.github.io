@@ -22,10 +22,10 @@ window.PROJECTS = [
     colour: "ginger",
     tagline: "There are hundreds of Solitaires out there, but none visually pop like mine.",
     description:
-      "Classic Klondike solitaire for iPhone, with cards that glide, flip and snap into place, satisfying sounds, and a helpful hint when you're stuck.",
+      "Classic Klondike solitaire for iPhone, iPad and Mac, with cards that glide, flip and snap into place, satisfying sounds, undo, and a helpful hint when you're stuck. Every deal can be won.",
     url: "",
     linkLabel: "",
     status: "in-progress",
-    tags: ["iPhone", "Game"],
+    tags: ["iPhone", "iPad", "Mac", "Game"],
   },
 ];
