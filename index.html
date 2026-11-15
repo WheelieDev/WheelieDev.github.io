@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tom's Workshop</title>
+  <meta name="description" content="Apps and side projects Tom is building.">
+  <link rel="icon" href="img/avatar.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="projects.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+</head>
+<body>
+  <!-- Painterly edge filter, reused by the brush-stroke shapes -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="rough">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7"/>
+      <feDisplacementMap in="SourceGraphic" scale="14"/>
+    </filter>
+  </svg>
+
+  <div class="brush brush-a" aria-hidden="true"></div>
+  <div class="brush brush-b" aria-hidden="true"></div>
+
+  <main class="wrap" x-data="site()">
+    <header class="hero">
+      <div class="portrait">
+        <div class="avatar">
+          <img src="img/avatar.jpg" alt="Illustrated portrait of Tom, smiling, with glasses and ginger hair" width="900" height="900">
+        </div>
+      </div>
+
+      <div class="intro">
+        <p class="scribble">hello there! I'm</p>
+        <h1>Tom<span class="dot">.</span></h1>
+        <p class="lede">
+          I make software that makes life a bit
+          <mark>easier</mark>, and the odd thing that's just
+          <mark class="ginger">fun</mark>.
+        </p>
+      </div>
+    </header>
+
+    <section aria-labelledby="work-title">
+      <div class="section-head">
+        <h2 id="work-title">Things I'm building</h2>
+      </div>
+
+      <div class="grid">
+        <template x-for="(p, i) in projects" :key="p.name">
+          <article class="card" :class="p.colour" :style="`--tilt:${i % 2 ? 1.2 : -1.2}deg`">
+            <span class="tape" aria-hidden="true"></span>
+            <div class="card-head">
+              <img class="app-icon" :src="p.icon" alt="" width="64" height="64">
+              <span class="status" :class="p.status" x-text="statusLabel(p.status)"></span>
+            </div>
+            <h3 x-text="p.name"></h3>
+            <p class="tagline" x-text="p.tagline"></p>
+            <p class="desc" x-text="p.description"></p>
+            <ul class="tags">
+              <template x-for="t in p.tags" :key="t"><li x-text="t"></li></template>
+            </ul>
+            <a x-show="p.url" class="link" :href="p.url" target="_blank" rel="noopener">
+              <span x-text="p.linkLabel || 'Visit'"></span>
+              <span class="arrow" aria-hidden="true">→</span>
+            </a>
+            <p x-show="!p.url" class="soon">coming soon…</p>
+          </article>
+        </template>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>© 2026 Tom Easterbrook. All rights reserved.</p>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="privacy.html">Mobile Game Privacy Policy</a>
+      </nav>
+    </footer>
+  </main>
+
+  <script>
+    function site() {
+      return {
+        projects: window.PROJECTS,
+        statusLabel(s) { return { live: '● Live', 'in-progress': '◐ In progress', archived: '○ Archived' }[s] ?? s },
+      }
+    }
+  </script>
+</body>
+</html>
