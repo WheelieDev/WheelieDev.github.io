@@ -311,3 +311,19 @@ h2::after {
 .contact button { margin-top: 18px; font: inherit; font-weight: 700; cursor: pointer; }
 .contact .honey { position: absolute; left: -9999px; }
 .contact .fine { margin: 8px 0 0; font-size: .9rem; color: var(--muted); }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
+.pill {
+  padding: 6px 16px;
+  font: 700 .95rem var(--display);
+  color: var(--ink);
+  background: var(--paper);
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+}
+.pill:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--line); }
+.pill[aria-pressed="true"] { background: var(--ginger-soft); box-shadow: 3px 3px 0 var(--line); }
+.pill:focus-visible { outline: 3px dashed var(--ginger); outline-offset: 3px; }
+.help-for { margin: 0 0 8px; font: 700 1.1rem var(--display); }
+.pills:not([hidden]) ~ .help .help-for { display: none; }

@@ -32,14 +32,38 @@
       <p class="sent" id="sent" hidden>Thanks, your message is on its way. I'll reply to the email address you gave, usually within a couple of days.</p>
 
       <h2>Solitaire: Classic Edition</h2>
-      <ul>
-        <li><strong>Remove Ads:</strong> on iPhone and iPad, open the pause menu (the Menu button, bottom right) and tap <strong>Remove ads</strong>. It's a one-off purchase. The Mac version has no adverts.</li>
-        <li><strong>Bought Remove Ads before, on a new device?</strong> Open the pause menu and tap <strong>Restore purchases</strong>, signed in with the same Apple Account.</li>
-        <li><strong>Undo:</strong> tap <strong>Undo</strong> (or press ⌘Z on the Mac) to take back moves one at a time, as many as you like.</li>
-        <li><strong>Hints:</strong> tap <strong>Hint</strong> (or press H on the Mac). The first hint points you along a way to win. Tap again to see other moves.</li>
-        <li><strong>Can every game be won?</strong> Yes. Every deal is checked before it's dealt, so there's always a way through.</li>
-        <li><strong>Advertising choices:</strong> in the UK and EU, open the pause menu and tap <strong>Privacy settings</strong> to change what you agreed to. See the <a href="privacy.html">privacy policy</a> for more.</li>
-      </ul>
+      <div class="pills" role="group" aria-label="Help for" hidden>
+        <button type="button" class="pill" data-show="ios" aria-pressed="true">iPhone &amp; iPad</button>
+        <button type="button" class="pill" data-show="mac" aria-pressed="false">Mac</button>
+      </div>
+
+      <div class="help" data-help="ios">
+        <h3 class="help-for">On iPhone and iPad</h3>
+        <ul>
+          <li><strong>Remove Ads:</strong> open the pause menu (the <strong>Menu</strong> button, bottom right) and tap <strong>Remove ads</strong>. It's a one-off purchase.</li>
+          <li><strong>Bought Remove Ads before, on a new device?</strong> Open the pause menu and tap <strong>Restore purchases</strong>, signed in with the same Apple Account.</li>
+          <li><strong>Moving cards:</strong> drag cards where you want them, or tap a column to make its best move. Tap the deck to draw.</li>
+          <li><strong>Undo:</strong> tap <strong>Undo</strong> to take back moves one at a time, as many as you like.</li>
+          <li><strong>Hints:</strong> tap <strong>Hint</strong>. The first hint points you along a way to win. Tap again to see other moves.</li>
+          <li><strong>New game:</strong> open the pause menu and tap <strong>New game</strong>, then choose Draw one or Draw three.</li>
+          <li><strong>Advertising choices:</strong> in the UK and EU, open the pause menu and tap <strong>Privacy settings</strong> to change what you agreed to. See the <a href="privacy.html">privacy policy</a> for more.</li>
+        </ul>
+      </div>
+
+      <div class="help" data-help="mac">
+        <h3 class="help-for">On the Mac</h3>
+        <ul>
+          <li><strong>No adverts:</strong> the Mac version is a one-off purchase from the Mac App Store, with no adverts and nothing more to buy.</li>
+          <li><strong>Moving cards:</strong> drag cards where you want them, or click a column to make its best move. Click the deck to draw.</li>
+          <li><strong>Undo:</strong> press <strong>⌘Z</strong>, or click <strong>Undo</strong>, to take back moves one at a time.</li>
+          <li><strong>Hints:</strong> press <strong>H</strong>, or click <strong>Hint</strong>. The first hint points you along a way to win.</li>
+          <li><strong>Pause:</strong> press <strong>Esc</strong>, or click <strong>Menu</strong>, for the pause menu, with music and sound settings.</li>
+          <li><strong>New game:</strong> press <strong>⌘N</strong>, choose Draw one or Draw three, then press <strong>Return</strong> to deal.</li>
+          <li><strong>On a new Mac?</strong> Download it again from your Purchased list in the Mac App Store, signed in with the same Apple Account.</li>
+        </ul>
+      </div>
+
+      <p><strong>Can every game be won?</strong> Yes, on every device. Each deal is checked before it's dealt, so there's always a way through.</p>
 
       <h2>Get in touch</h2>
       <p>Found a bug, or have an idea? Send me a message and I'll reply by email.</p>
@@ -82,6 +106,18 @@
   </main>
 
   <script>
+    // Help for iPhone & iPad or the Mac: start on the visitor's own kind of
+    // device. Without this script, both lists simply show.
+    const pills = document.querySelector('.pills')
+    const show = (which) => {
+      pills.querySelectorAll('.pill').forEach(p => p.setAttribute('aria-pressed', p.dataset.show === which))
+      document.querySelectorAll('.help').forEach(h => { h.hidden = h.dataset.help !== which })
+    }
+    const onMac = /Mac/.test(navigator.platform) && navigator.maxTouchPoints < 2
+    pills.hidden = false
+    pills.addEventListener('click', e => { const b = e.target.closest('.pill'); if (b) show(b.dataset.show) })
+    show(onMac ? 'mac' : 'ios')
+
     // Back from FormSubmit after sending: say thanks.
     if (new URLSearchParams(location.search).has('sent')) {
       document.getElementById('sent').hidden = false
